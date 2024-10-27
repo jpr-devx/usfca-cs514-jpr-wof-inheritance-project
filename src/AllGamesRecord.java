@@ -56,7 +56,6 @@ public class AllGamesRecord {
      * Collections class to sort the game instances
      * @return sorted list of n scores
      */
-    //fixme: Need to account for n larger than number of actual occurrences
     private ArrayList<GameRecord> highGameList(String playerId, int n){
         AllGamesRecord tempList = new AllGamesRecord();
 
@@ -98,7 +97,7 @@ public class AllGamesRecord {
 
         System.out.println("Original List of games: " + games);
 
-        ArrayList<GameRecord> sortedGames = games.highGameList("John", 4);
+        ArrayList<GameRecord> sortedGames = games.highGameList("John", 3);
         System.out.println("Sorted list of games: " + sortedGames);
 
     }

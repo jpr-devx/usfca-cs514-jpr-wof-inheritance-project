@@ -49,7 +49,6 @@ public class AllGamesRecord {
         int limiter = sorted.size() - n >= 0 ? sorted.size() - n : 0;
 
         for (int index = sorted.size() - 1; index >= limiter; index--) sortedN.add(sorted.get(index));
-//        for (int index = sorted.size() - 1; index >= sorted.size() - n; index--) sortedN.add(sorted.get(index));
 
         // Return descending sortedN arrayList with n-highest scores
         return sortedN;
@@ -70,13 +69,19 @@ public class AllGamesRecord {
         return tempList.highGameList(n);
     }
 
+    /**
+     * Returns string representation of gameRecords ArrayList
+     * @return ArrayList of gameRecords
+     */
     @Override
     public String toString() {
-        return "AllGamesRecord{" +
-                "gameRecords=" + gameRecords +
-                '}';
+        return "AllGamesRecord{gameRecords=" + gameRecords + '}';
     }
 
+    /**
+     * Main method for AllGamesRecord
+     * @param args program arguments
+     */
     public static void main(String[] args){
 
         AllGamesRecord games = new AllGamesRecord();

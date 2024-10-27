@@ -49,6 +49,7 @@ public class GameRecord implements Comparable{
      * @param o the object to be compared.
      * @return -1 if this GameRecord is less than the other GameRecord object, 0 if equal to and 1 if greater than
      */
+    @Override
     public int compareTo(Object o){
         GameRecord other = (GameRecord) o;
         return Integer.compare(this.score, other.score);

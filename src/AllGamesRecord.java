@@ -36,7 +36,6 @@ public class AllGamesRecord {
      * Collections class to sort the game instances
      * @return sorted list of n scores
      */
-    //fixme: Need to account for n larger than number of actual occurrences
     private ArrayList<GameRecord> highGameList(int n){
         // Sort games by score ascending in new arrayList sorted
         ArrayList<GameRecord> sorted = new ArrayList<>(this.gameRecords);
@@ -45,7 +44,12 @@ public class AllGamesRecord {
         // Create new arrayList sortedN to add the n-highest in descending order. Done in for-loop below
         ArrayList<GameRecord> sortedN = new ArrayList<>();
 
-        for (int index = sorted.size() - 1; index >= sorted.size() - n; index--) sortedN.add(sorted.get(index));
+        // Sets limiter that stops for-loop iteration to 0 if n exceeds size of gameRecords, otherwise the difference
+        // between the size and n is used
+        int limiter = sorted.size() - n >= 0 ? sorted.size() - n : 0;
+
+        for (int index = sorted.size() - 1; index >= limiter; index--) sortedN.add(sorted.get(index));
+//        for (int index = sorted.size() - 1; index >= sorted.size() - n; index--) sortedN.add(sorted.get(index));
 
         // Return descending sortedN arrayList with n-highest scores
         return sortedN;
@@ -97,7 +101,7 @@ public class AllGamesRecord {
 
         System.out.println("Original List of games: " + games);
 
-        ArrayList<GameRecord> sortedGames = games.highGameList("John", 3);
+        ArrayList<GameRecord> sortedGames = games.highGameList(33);
         System.out.println("Sorted list of games: " + sortedGames);
 
     }

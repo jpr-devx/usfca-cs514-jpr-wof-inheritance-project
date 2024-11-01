@@ -191,20 +191,21 @@ public class WheelOfFortune {
                     found = true;
                     this.hiddenPhrase.setCharAt(index, this.phrase.charAt(index));
                     int[] newArr = this.matchMap.get(guess);
-                    newArr[1]++;
-                    this.matchMap.replace(guess, newArr);
+                    newArr[1]++;    // increment exact match by one, since its only one char guesses, there can only be
+                    // exact matches
+                    this.matchMap.replace(guess, newArr); // replace current array for char with incremented array
                 }
             }
             return found;
         }
 
-//        public String notifyGuess(int[] guessSpots){
+//        public String notifyGuess(){
 //            String notification = "";
 //            int guessesLeft = this.guessesAllowed - this.missesMade;
 //            if (guessSpots.length == 0) notification =
 //                    "Nothing was found | Guesses left: " + guessesLeft + " | Misses made: " + this.missesMade;
 //
-//
+//            return notification;
 //        }
 
 

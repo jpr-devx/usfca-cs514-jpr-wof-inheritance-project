@@ -179,26 +179,24 @@ public class WheelOfFortune {
             return upperFound || lowerFound;
         }
 
-        //todo: add javadoc for method once officialy ported over to class refactor
-//        public HashMap<Character, ArrayList<Integer>> processGuess2(char guess){
-//            ArrayList<Integer> guessSpots = new ArrayList<>();
-//            //todo: Later in transition, must add assertion that string sent has length equal to or less than length
-//            // of phrase
-//
-//
-//            // note: For characters in hashmap, those correspond to guesses successfully made
-//            // note: For the ArrayList<Integer> lists, there are two elements, number of partial correct and exact
-//            //  correct. If the char is not in hashMap and
-//
-//
-//            for (int index = 0; index < this.phrase.length(); index++){
-//                if(Character.toLowerCase(this.phrase.charAt(index)) == guess) {
-//                    this.hiddenPhrase.setCharAt(index, this.phrase.charAt(index));
-//
-//                }
-//            }
-//            return guessSpots;
-//        }
+        //todo: add javadoc for method once officially ported over to class refactor
+        public boolean processGuess2(char guess){
+
+            //todo: Later in transition, must add assertion that string sent has length equal to or less than length
+            // of phrase
+            boolean found = false;
+
+            for (int index = 0; index < this.phrase.length(); index++){
+                if(Character.toLowerCase(this.phrase.charAt(index)) == guess) {
+                    found = true;
+                    this.hiddenPhrase.setCharAt(index, this.phrase.charAt(index));
+                    int[] newArr = this.matchMap.get(guess);
+                    newArr[1]++;
+                    this.matchMap.replace(guess, newArr);
+                }
+            }
+            return found;
+        }
 
 //        public String notifyGuess(int[] guessSpots){
 //            String notification = "";
@@ -234,7 +232,7 @@ public class WheelOfFortune {
                     System.out.println("Previous guesses: " + game.previousGuesses + "\n");
                     guess = game.getGuess();
                 }
-                boolean letterFound = game.processGuess(guess);
+                boolean letterFound = game.processGuess2(guess);
                 // boolean result = game.processGuess(guess).size() != 0;
 
                 // Conditionals to handle prompt type, guessesLeft counter, and game exit mechanics

@@ -27,6 +27,7 @@ public class WheelOfFortune {
 
         // New addition
         HashSet<Character> presentLetters;
+        Map<Character, int[]> matchMap;
 
         /**
          * WheelOfFortuneProject.WheelOfFortuneObject Constructor - Defines phrase and hiddenPhrase attributes upon object
@@ -80,9 +81,18 @@ public class WheelOfFortune {
             // Define hashSet of all letters present in gamephrase. This will be used to create a hashMap to store
             // current exact and partial matches
             this.presentLetters = this.phrase.chars()
-                    .mapToObj(e -> (char) e)
+                    .mapToObj(e ->
+                            Character.toLowerCase((char) e))
                     .collect(Collectors.toCollection(HashSet::new));
+            this.presentLetters.remove(' '); // remove spaces from map
 
+            // Define map that each key corresponds to distinct character present in phrase and each value
+            // corresponds to [#partialMatches, #exactMatches]
+            this.matchMap = this.presentLetters.stream()
+                    .collect(Collectors.toMap(
+                            ch -> ch,
+                            intArr -> new int[2]
+                    ));
 
         }
 

@@ -1,10 +1,27 @@
-public interface Game {
+import java.util.ArrayList;
 
-    public AllGamesRecord playAll();
+public abstract class Game {
 
-    public GameRecord play();
+    ArrayList<Game> games;
 
-    public boolean playNext();
+    public Game(){
+        this.games = new ArrayList<>();
+    }
+
+    /**
+     * a method that plays a set of games and records and returns an AllGamesRecord object for the set
+     * @return
+     */
+//    public AllGamesRecord playAll(){
+//        // todo: define method
+//            for (Game game : games){
+//
+//        }
+//    }
+
+    public abstract GameRecord play();
+
+    public abstract boolean playNext();
 
 
 }

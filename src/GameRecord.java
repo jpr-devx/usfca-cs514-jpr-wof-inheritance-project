@@ -1,4 +1,4 @@
-public class GameRecord implements Comparable{
+public class GameRecord implements Comparable<GameRecord>{
 
     int score;
     String playerId;
@@ -46,13 +46,12 @@ public class GameRecord implements Comparable{
 
     /**
      * Compares GameRecord objects by their score
-     * @param o the object to be compared.
+     * @param o the GameRecord to be compared.
      * @return -1 if this GameRecord is less than the other GameRecord object, 0 if equal to and 1 if greater than
      */
     @Override
-    public int compareTo(Object o){
-        GameRecord other = (GameRecord) o;
-        return Integer.compare(this.score, other.score);
+    public int compareTo(GameRecord o) {
+        return Integer.compare(this.score, o.score);
     }
 
     /**
@@ -76,4 +75,6 @@ public class GameRecord implements Comparable{
         GameRecord other = (GameRecord) o;
         return getScore() == other.getScore() && this.playerId.equals(other.playerId);
     }
+
+
 }

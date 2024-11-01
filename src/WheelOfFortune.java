@@ -1,10 +1,8 @@
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class WheelOfFortune {
@@ -24,6 +22,11 @@ public class WheelOfFortune {
         String phrase;
         StringBuilder hiddenPhrase;
         HashSet<Character> previousGuesses;
+        int guessesAllowed;
+        int missesMade;
+
+        // New addition
+        HashSet<Character> presentLetters;
 
         /**
          * WheelOfFortuneProject.WheelOfFortuneObject Constructor - Defines phrase and hiddenPhrase attributes upon object
@@ -31,13 +34,15 @@ public class WheelOfFortune {
          * throughout game execution
          *
          */
-        public WheelOfFortune() {
+        public WheelOfFortune(int guessesAllowed) {
 
             this.phrase = "";
             this.hiddenPhrase = new StringBuilder();
             this.previousGuesses = new HashSet<>();
             this.randomPhrase();
             this.generateHiddenPhrase();
+            this.guessesAllowed = guessesAllowed;
+            this.missesMade = 0;
 
             String introduction =
                     "================================================================================" +
@@ -71,6 +76,14 @@ public class WheelOfFortune {
             Random rand = new Random();
             int r= rand.nextInt(3); // gets 0, 1, or 2
             this.phrase = phraseList.get(r);
+
+            // Define hashSet of all letters present in gamephrase. This will be used to create a hashMap to store
+            // current exact and partial matches
+            this.presentLetters = this.phrase.chars()
+                    .mapToObj(e -> (char) e)
+                    .collect(Collectors.toCollection(HashSet::new));
+
+
         }
 
         /**
@@ -93,6 +106,7 @@ public class WheelOfFortune {
             }
         }
 
+        //todo: Change javadoc to reflect new function
         /**
          * Returns guess char if a valid guess. If "quit" is entered, '0' is returned to initiate
          * game exit sequence. If a guess containing more than one char, or the one char is not a
@@ -110,18 +124,13 @@ public class WheelOfFortune {
             } while (!input.equalsIgnoreCase("quit"));
 
             return '0';
-
-
-
-//            if (input.equalsIgnoreCase("quit")) {
-//                return '0';
-//            } else if (input.length() != 1 || !Character.isAlphabetic(input.charAt(0))) {
-//                return '?';
-//            } else {
-//                return Character.toLowerCase(input.charAt(0));
-//            }
         }
 
+
+        // todo: now that getguess is change, a valid letter or '0' (for quit) will be sent. This will influence the
+    //      printing, which may be compartmentalized into a different method, but here, I am thinking I might change
+    //      the return type to an array of integers corresponding to the locations that the case-insensitive guesses
+    //      were found. Otherwise array.size() == 0 if no guesses were found
         /**
          * Method returns indicator of whether a valid guess was found in phrase attribute.
          * Additionally, if valid guess is found, object's hiddenPhrase attribute is modified to
@@ -160,6 +169,37 @@ public class WheelOfFortune {
             return upperFound || lowerFound;
         }
 
+        //todo: add javadoc for method once officialy ported over to class refactor
+//        public HashMap<Character, ArrayList<Integer>> processGuess2(char guess){
+//            ArrayList<Integer> guessSpots = new ArrayList<>();
+//            //todo: Later in transition, must add assertion that string sent has length equal to or less than length
+//            // of phrase
+//
+//
+//            // note: For characters in hashmap, those correspond to guesses successfully made
+//            // note: For the ArrayList<Integer> lists, there are two elements, number of partial correct and exact
+//            //  correct. If the char is not in hashMap and
+//
+//
+//            for (int index = 0; index < this.phrase.length(); index++){
+//                if(Character.toLowerCase(this.phrase.charAt(index)) == guess) {
+//                    this.hiddenPhrase.setCharAt(index, this.phrase.charAt(index));
+//
+//                }
+//            }
+//            return guessSpots;
+//        }
+
+//        public String notifyGuess(int[] guessSpots){
+//            String notification = "";
+//            int guessesLeft = this.guessesAllowed - this.missesMade;
+//            if (guessSpots.length == 0) notification =
+//                    "Nothing was found | Guesses left: " + guessesLeft + " | Misses made: " + this.missesMade;
+//
+//
+//        }
+
+
         /**
          * Method executes WheelOfFortune object methods on initialized object to play WheelOfFortune
          * game composing of a while loop containing prompts to user on state of game, guesses left
@@ -170,8 +210,9 @@ public class WheelOfFortune {
          */
         public static void main(String [] args){
 
-            WheelOfFortune game = new WheelOfFortune();
             int guessesLeft = 3;
+            WheelOfFortune game = new WheelOfFortune(guessesLeft);
+
             int missNum = 0;
             String message;
 
@@ -184,6 +225,7 @@ public class WheelOfFortune {
                     guess = game.getGuess();
                 }
                 boolean letterFound = game.processGuess(guess);
+                // boolean result = game.processGuess(guess).size() != 0;
 
                 // Conditionals to handle prompt type, guessesLeft counter, and game exit mechanics
                 if (guess == '0') {

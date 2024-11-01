@@ -102,15 +102,24 @@ public class WheelOfFortune {
          */
         public char getGuess(){
             Scanner in = new Scanner(System.in);
-            System.out.print("Please guess a single letter or type quit to exit game: ");
-            String input = in.next();
-            if (input.equalsIgnoreCase("quit")) {
-                return '0';
-            } else if (input.length() != 1 || !Character.isAlphabetic(input.charAt(0))) {
-                return '?';
-            } else {
-                return Character.toLowerCase(input.charAt(0));
-            }
+            String input;
+            do {
+                System.out.print("Please guess a single letter or type quit to exit game: ");
+                input = in.next();
+                if (input.length() == 1 && Character.isAlphabetic(input.charAt(0))) return Character.toLowerCase(input.charAt(0));
+            } while (!input.equalsIgnoreCase("quit"));
+
+            return '0';
+
+
+
+//            if (input.equalsIgnoreCase("quit")) {
+//                return '0';
+//            } else if (input.length() != 1 || !Character.isAlphabetic(input.charAt(0))) {
+//                return '?';
+//            } else {
+//                return Character.toLowerCase(input.charAt(0));
+//            }
         }
 
         /**

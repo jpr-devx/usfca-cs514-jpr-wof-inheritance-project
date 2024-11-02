@@ -183,26 +183,25 @@ public class WheelOfFortune{
     }
 
 
-        /**
-         * Method executes WheelOfFortune object methods on initialized object to play WheelOfFortune
-         * game composing of a while loop containing prompts to user on state of game, guesses left
-         * and previous guesses made. Logic and associated statements prompt user for an additional guess
-         * with no change in guesses remaining if a duplicate guess, correct or incorrect.
-         *
-         * @param args main method args
-         */
-        public static void main(String [] args){
+    /**
+     * Method executes WheelOfFortune object methods on initialized object to play WheelOfFortune
+     * game composing of a while loop containing prompts to user on state of game, guesses left
+     * and previous guesses made. Logic and associated statements prompt user for an additional guess
+     * with no change in guesses remaining if a duplicate guess, correct or incorrect.
+     *
+     * @param args main method args
+     */
+    public static void main(String [] args){
 
-            int guessesLeft = 5;
-            WheelOfFortune game = new WheelOfFortune(guessesLeft);
-            int result;
+        int guessesLeft = 5;
+        WheelOfFortune game = new WheelOfFortune(guessesLeft);
+        int result;
 
-            do {
-                char guess = game.getGuess();
-                result = game.processGuess(guess);
-            } while (result != -2);
+        do {
+            char guess = game.getGuess();
+            result = game.processGuess(guess);
+        } while (result != -2);
 
-
-        }
+    }
 
 }

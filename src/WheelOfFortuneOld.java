@@ -4,7 +4,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class WheelOfFortune{
+public class WheelOfFortuneOld {
 
     private String phrase;
     private StringBuilder hiddenPhrase;
@@ -21,7 +21,7 @@ public class WheelOfFortune{
      * throughout game execution
      *
      */
-    public WheelOfFortune(int guessesAllowed) {
+    public WheelOfFortuneOld(int guessesAllowed) {
 
         this.phrase = "";
         this.hiddenPhrase = new StringBuilder();
@@ -194,7 +194,7 @@ public class WheelOfFortune{
     public static void main(String [] args){
 
         int guessesLeft = 5;
-        WheelOfFortune game = new WheelOfFortune(guessesLeft);
+        WheelOfFortuneOld game = new WheelOfFortuneOld(guessesLeft);
         int result;
 
         do {

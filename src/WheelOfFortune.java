@@ -4,20 +4,7 @@ import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
-
-public class WheelOfFortune {
-//public abstract class WheelOfFortune extends Game {
-//    public AllGamesRecord playAll(){
-//
-//    }
-//
-//    public GameRecord play(){
-//
-//    }
-//
-//    public boolean playNext(){
-//
-//    }
+public class WheelOfFortune{
 
     private String phrase;
     private StringBuilder hiddenPhrase;
@@ -102,18 +89,18 @@ public class WheelOfFortune {
          * Nothing is returned.
          *
          */
-        public void generateHiddenPhrase(){
-            // Code block for the construction of the hidden phrase based of the "phrase" string
-            for (int i = 0; i < this.phrase.length(); i++) {
-                char ch = this.phrase.charAt(i);
-                if (Character.isLetter(ch)) {
-                    this.hiddenPhrase.append('*');
-                } else {
-                    // If not a letter, the original char in "ch" is added to the "hidden" StringBuilder
-                    this.hiddenPhrase.append(ch);
-                }
+    public void generateHiddenPhrase(){
+        // Code block for the construction of the hidden phrase based of the "phrase" string
+        for (int i = 0; i < this.phrase.length(); i++) {
+            char ch = this.phrase.charAt(i);
+            if (Character.isLetter(ch)) {
+                this.hiddenPhrase.append('*');
+            } else {
+                // If not a letter, the original char in "ch" is added to the "hidden" StringBuilder
+                this.hiddenPhrase.append(ch);
             }
         }
+    }
 
     /**
      * Returns guess char if a valid guess. If "quit" is entered, '0' is returned to initiate

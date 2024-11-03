@@ -46,8 +46,6 @@ public class WheelOfFortuneUserGame extends WheelOfFortune{
             this.generateHiddenPhrase();
         }
 
-        String startMenuMessage = "\nPlease select from the following options:\n1. Continue to play this next game\n2. Exit\nEnter here: ";
-
         int foundInt;
         char guess;
 

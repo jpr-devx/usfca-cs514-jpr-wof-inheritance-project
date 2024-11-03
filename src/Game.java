@@ -2,26 +2,27 @@ import java.util.ArrayList;
 
 public abstract class Game {
 
-    ArrayList<Game> games;
+    protected AllGamesRecord gamesRecords;
 
     public Game(){
-        this.games = new ArrayList<>();
+        this.gamesRecords = new AllGamesRecord();
     }
 
     /**
      * a method that plays a set of games and records and returns an AllGamesRecord object for the set
      * @return
      */
-//    public AllGamesRecord playAll(){
-//        // todo: define method
-//            for (Game game : games){
-//
-//        }
-//    }
+    protected AllGamesRecord playAll(){
+        while (playNext()) {
+            GameRecord record = play();
+            this.gamesRecords.add(record);
+        }
+        return gamesRecords;
+    }
 
-    public abstract GameRecord play();
+    protected abstract GameRecord play();
 
-    public abstract boolean playNext();
+    protected abstract boolean playNext();
 
 
 }

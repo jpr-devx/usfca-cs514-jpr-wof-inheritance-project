@@ -75,7 +75,7 @@ public class AllGamesRecord {
      */
     @Override
     public String toString() {
-        return "AllGamesRecord{gameRecords=" + gameRecords + '}';
+        return "GameRecords: " + gameRecords + "\nAverage Score: " + this.average() + " points";
     }
 
 }

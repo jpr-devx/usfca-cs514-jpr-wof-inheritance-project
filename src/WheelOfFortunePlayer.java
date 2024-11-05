@@ -1,10 +1,12 @@
+import java.util.HashSet;
+
 public interface WheelOfFortunePlayer {
 
     /**
      * get the next guess from the player
      * @return next player guess
      */
-    public char nextGuess();
+    public char nextGuess(StringBuilder hiddenPhrase, HashSet<Character> previousGuesses);
 
     /**
      *

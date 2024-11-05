@@ -69,6 +69,20 @@ public class AllGamesRecord {
         return tempList.highGameList(n);
     }
 
+    protected double average(String playerId){
+        AllGamesRecord tempList = new AllGamesRecord();
+        double temp = 0.;
+        int gameNum = 0;
+
+        for (GameRecord game : this.gameRecords){
+            if (game.playerId.equals(playerId)) {
+                temp += game.score;
+                gameNum++;
+            }
+        }
+        return temp/gameNum;
+    }
+
     /**
      * Returns string representation of gameRecords ArrayList
      * @return ArrayList of gameRecords

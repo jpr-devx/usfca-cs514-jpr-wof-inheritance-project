@@ -140,9 +140,9 @@ public class WheelOfFortuneAIGame extends WheelOfFortune{
 
     public static void main(String[] args){
 
-        WheelOfFortuneAISmartPlayer player1 = new WheelOfFortuneAISmartPlayer("John");
-        WheelOfFortuneAISmartPlayer player2 = new WheelOfFortuneAISmartPlayer("Lili");
-        WheelOfFortuneAISmartPlayer player3 = new WheelOfFortuneAISmartPlayer("Tania");
+        WheelOfFortunePlayer player1 = new WheelOfFortuneAIEasyPlayer("John");
+        WheelOfFortunePlayer player2 = new WheelOfFortuneAINaivePlayer("Lili");
+        WheelOfFortunePlayer player3 = new WheelOfFortuneAISmartPlayer("Tania");
 
         ArrayList<WheelOfFortunePlayer> players = new ArrayList<>(Arrays.asList(player1, player2, player3));
 
@@ -153,8 +153,20 @@ public class WheelOfFortuneAIGame extends WheelOfFortune{
 
 //        WheelOfFortuneAIGame game = new WheelOfFortuneAIGame(3);
 
+
+
         AllGamesRecord records = game.playAll();
-        System.out.println(records);
+        System.out.println(records + "\n");
+
+        System.out.println("HighGame List by Player:");
+        for (WheelOfFortunePlayer player : players){
+            System.out.println(records.highGameList(player.playerId(), 3));
+        }
+
+        System.out.println("\nPlayer Averages:");
+        for (WheelOfFortunePlayer player : players){
+            System.out.println(player.playerId() + ": " + records.average(player.playerId()));
+        }
 
 
     }

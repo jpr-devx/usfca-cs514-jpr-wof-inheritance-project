@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public abstract class WheelOfFortune extends Game{
 
-    HashSet<String> previousPhrases;
+    protected HashSet<String> previousPhrases;
     protected String phrase;
     protected StringBuilder hiddenPhrase;
     protected HashSet<Character> previousGuesses;

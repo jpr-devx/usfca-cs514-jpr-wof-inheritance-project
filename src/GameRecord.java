@@ -1,7 +1,7 @@
 public class GameRecord implements Comparable<GameRecord>{
 
-    int score;
-    String playerId;
+    protected int score;
+    protected String playerId;
 
     /**
      * Initialzies GameRecord object with score at

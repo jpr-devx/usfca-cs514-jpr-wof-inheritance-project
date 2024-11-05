@@ -6,13 +6,13 @@ public interface WheelOfFortunePlayer {
      * get the next guess from the player
      * @return next player guess
      */
-    public char nextGuess(StringBuilder hiddenPhrase, HashSet<Character> previousGuesses);
+    char nextGuess(StringBuilder hiddenPhrase, HashSet<Character> previousGuesses);
 
     /**
      *
      * @return ID for player
      */
-    public String playerId();
+    String playerId();
 
     /**
      * reset the player to start a new game

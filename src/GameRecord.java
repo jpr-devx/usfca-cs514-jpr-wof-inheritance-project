@@ -8,7 +8,7 @@ public class GameRecord implements Comparable<GameRecord>{
 
     /**
      * Initialzies GameRecord object with score at
-     * @param playerId
+     * @param playerId Id of player
      */
     public GameRecord(String playerId){
         this.score = 0;

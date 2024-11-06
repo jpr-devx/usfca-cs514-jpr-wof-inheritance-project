@@ -209,8 +209,21 @@ public class Mastermind extends GuessingGame{
      */
     @Override
     protected boolean playNext() {
-        return this.previousPhrases.size() != 3;
+//        return this.previousPhrases.size() != 3;
+        String startMenuMessage = "\nPlease select from the following options:\n1. Continue to play this next game\n2. Exit\nEnter here: ";
+        Scanner scan = new Scanner(System.in);
+        String input;
+
+        if (this.previousPhrases.size() == 3) return false;
+
+        do {
+            System.out.print(startMenuMessage);
+            input = scan.next();
+        } while (!input.equals("1") && !input.equals("2"));
+
+        return input.equals("1");
     }
+
 
     /**
      * Main method that runs the Mastermind game for user to play

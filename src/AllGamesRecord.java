@@ -1,9 +1,14 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Objects;
 
+/**
+ * Class that allows for storage of multiple game records and for information about those records to be summarized
+ * @see GameRecord
+ */
 public class AllGamesRecord {
 
-    ArrayList<GameRecord> gameRecords;
+    protected ArrayList<GameRecord> gameRecords;
 
     /**
      * Constructor that initializes object with arrayList of gameRecords
@@ -69,6 +74,11 @@ public class AllGamesRecord {
         return tempList.highGameList(n);
     }
 
+    /**
+     * Returns average for a specific player's games
+     * @param playerId a specific player's ID
+     * @return average of a player's games
+     */
     protected double average(String playerId){
         AllGamesRecord tempList = new AllGamesRecord();
         double temp = 0.;
@@ -92,4 +102,16 @@ public class AllGamesRecord {
         return "GameRecords: " + gameRecords + "\nAverage Score: " + this.average() + " points";
     }
 
+    /**
+     * Returns true if object is the same instance of a AllGamesRecord object or if both ArrayList's of GameRecords are the same
+     * @param o Other object to be compared with
+     * @return true if objects are equal, otherwise false
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AllGamesRecord that = (AllGamesRecord) o;
+        return Objects.equals(gameRecords, that.gameRecords);
+    }
 }

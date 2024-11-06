@@ -1,36 +1,69 @@
-import java.io.ByteArrayInputStream;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Random;
 
-public class WheelOfFortuneAIEasyPlayer implements WheelOfFortunePlayer{
+/**
+ * Wheel of Fortune player that simply guesses a random letter
+ */
+public class WheelOfFortuneAIEasyPlayer implements GuessingPlayer {
 
     protected String playerId;
-    protected int botGuessNum;
-    protected HashSet<Character> previousGuesses;
-
-
-    //todo: does one game, now I have to handle playNext
 
     public WheelOfFortuneAIEasyPlayer(String userName){
         this.playerId = userName;
     }
 
+    /**
+     * Method called by games getGuess method
+     * @param hiddenPhrase game's hiddenphrase
+     * @param previousGuesses previous guesses that player has made
+     * @return String representation of player's guess
+     */
     @Override
-    public char nextGuess(StringBuilder hiddenPhrase, HashSet<Character> previousGuesses) {
+    public String nextGuess(StringBuilder hiddenPhrase, HashSet<String> previousGuesses) {
 
         Random rand = new Random();
-        char guess = (char) ('a' + rand.nextInt(0 ,25));
-
-        return guess;
+        return  "" + (char) ('a' + rand.nextInt(0 ,25));
 
     }
 
-
+    /**
+     * Method is not used in this class
+     */
     @Override
     public void reset() {
-        //todo: need for implementing this depends on strategy. This may not be required to do anything if
-        // getGuess is simple enough
     }
 
+    /**
+     * Compares two players by their player ID
+     * @param o other object
+     * @return true if players are the same instance or if their playerIDs are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WheelOfFortuneAIEasyPlayer that = (WheelOfFortuneAIEasyPlayer) o;
+        return Objects.equals(playerId, that.playerId);
+    }
+
+
+
+    /**
+     * String representation of player
+     * @return String representation of player
+     */
+    @Override
+    public String toString() {
+        return "WheelOfFortuneAIEasyPlayer{" +
+                "playerId='" + playerId + '\'' +
+                '}';
+    }
+
+    /**
+     * Returns player's ID
+     * @return playerID
+     */
     @Override
     public String playerId() {
         return this.playerId;

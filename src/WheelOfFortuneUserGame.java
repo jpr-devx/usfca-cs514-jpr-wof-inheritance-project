@@ -1,13 +1,20 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Scanner;
 
+/**
+ * WheelOfFortune game that features a human user interacting with a CLI to make guesses on a WheelOfFortune game
+ */
 public class WheelOfFortuneUserGame extends WheelOfFortune{
 
-
-
+    /**
+     * WoFUserGame constructor that initializes game with a player name and guesses allowed for game
+     * @param userName name of player
+     * @param guessesAllowed number of guesses that a user can make
+     */
     public WheelOfFortuneUserGame(String userName, int guessesAllowed){
-        super();
         this.previousPhrases = new HashSet<>();
-        this.randomPhrase();
+        this.randomPhrase("WoFphrases.txt");
         this.generateHiddenPhrase();
         this.previousGuesses = new HashSet<>();
         this.guessesAllowed = guessesAllowed;
@@ -15,8 +22,12 @@ public class WheelOfFortuneUserGame extends WheelOfFortune{
         this.userName = userName;
     }
 
+    /**
+     * Returns single character as a string that is validated
+     * @return validated letter or "quit" for game exit sequence
+     */
     @Override
-    public char getGuess() {
+    protected String getGuess() {
 
         Scanner in = new Scanner(System.in);
         String input;
@@ -24,30 +35,30 @@ public class WheelOfFortuneUserGame extends WheelOfFortune{
             System.out.print("Please guess a single letter or type quit to exit game: ");
             input = in.next();
             System.out.println();
-            if (input.length() == 1 && Character.isAlphabetic(input.charAt(0))) return Character.toLowerCase(input.charAt(0));
+            if (input.length() == 1 && Character.isAlphabetic(input.charAt(0))) return input;
         } while (!input.equalsIgnoreCase("quit"));
 
-        return '0';
+        return "0";
     }
 
+    /**
+     * Plays game for the human user that will interact with CLI.
+     * @return record of game with the users name and their score
+     */
     @Override
     protected GameRecord play() {
         GameRecord record = new GameRecord(this.userName);
-        // note: The way that random phrase is created is that a random string is retrieved and thats returned. So
-        //  without changing the return type, or adding a data member or something I can't think of anything else
-        //  but this...
-
         this.guessesAllowed = 3;
 
         if (!this.previousPhrases.isEmpty()){
             while(this.previousPhrases.contains(this.phrase)){
-                this.randomPhrase();
+                this.randomPhrase("WoFphrases.txt");
             }
             this.generateHiddenPhrase();
         }
 
         int foundInt;
-        char guess;
+        String guess;
 
         String introduction =
                 "================================================================================" +
@@ -66,7 +77,7 @@ public class WheelOfFortuneUserGame extends WheelOfFortune{
         do {
             guess = this.getGuess();
 
-            if (guess == '0') {
+            if (guess.equals("0")) {
                 record.setScore(0);
                 return record;
             }
@@ -89,6 +100,11 @@ public class WheelOfFortuneUserGame extends WheelOfFortune{
 
     }
 
+    /**
+     * Returns true/false on whether the next game should be played. Relevant data members are cleared for the next
+     * game to be played.
+     * @return true if next game should be played, false if the player has played their last game
+     */
     @Override
     protected boolean playNext() {
         String startMenuMessage = "\nPlease select from the following options:\n1. Continue to play this next game\n2. Exit\nEnter here: ";
@@ -105,8 +121,37 @@ public class WheelOfFortuneUserGame extends WheelOfFortune{
         return input.equals("1");
     }
 
+    /**
+     * Returns string representation of game
+     * @return string representation of game
+     */
+    @Override
+    public String toString() {
+        return "WheelOfFortuneUserGame{" +
+                "userName='" + userName + '\'' +
+                ", hiddenPhrase=" + hiddenPhrase +
+                ", missesMade=" + missesMade +
+                ", gamesRecords=" + gamesRecords +
+                '}';
+    }
 
+    /**
+     * Compares game with other object for equality
+     * @param o other object
+     * @return true if same instance or data members are equal, otherwise false
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WheelOfFortuneUserGame that = (WheelOfFortuneUserGame) o;
+        return userName.equals(that.userName) && hiddenPhrase.toString().contentEquals(that.hiddenPhrase) && missesMade == that.missesMade && gamesRecords.equals(that.gamesRecords);
+    }
 
+    /**
+     * Main method that runs the Wheel of Fortune game for user to play
+     * @param args program arguments
+     */
     public static void main(String[] args){
 
         WheelOfFortuneUserGame game = new WheelOfFortuneUserGame("John", 3);

@@ -1,3 +1,6 @@
+/**
+ * Class that stores information of a finished game (Score and playerID)
+ */
 public class GameRecord implements Comparable<GameRecord>{
 
     protected int score;
@@ -64,9 +67,9 @@ public class GameRecord implements Comparable<GameRecord>{
     }
 
     /**
-     *
-     * @param o
-     * @return
+     * Returns true if both objects are the same GameRecord instance or if their playerId's and scores are equal, otherwise false
+     * @param o other object being compared
+     * @return true if objects are equal, false otherwise
      */
     @Override
     public boolean equals(Object o) {

@@ -1,15 +1,18 @@
 import java.util.HashSet;
 
-public interface WheelOfFortunePlayer {
+/**
+ * Player interface for a guessing game
+ */
+public interface GuessingPlayer {
 
     /**
      * get the next guess from the player
      * @return next player guess
      */
-    char nextGuess(StringBuilder hiddenPhrase, HashSet<Character> previousGuesses);
+    String nextGuess(StringBuilder hiddenPhrase, HashSet<String> previousGuesses);
 
     /**
-     *
+     * Returns ID of player
      * @return ID for player
      */
     String playerId();
